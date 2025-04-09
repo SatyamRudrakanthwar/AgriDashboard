@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Health</title>
+    <link rel="stylesheet" href="<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Health</title>
+    <link rel="stylesheet" href="farm_health.css">
+</head>
+<body>
+    <header class="header">AgriSavant™</header>
+    <div class="container">
+        <aside class="sidebar">
+            <button class="owner-btn">Owner</button>
+            <nav>
+                <ul>
+                    <li><a href="dash.html">Dashboard</a></li>
+                    <li><a href="farm_health.html">Farm Health</a></li>
+                    <li><a href="cal.html">Action Calendar</a></li>
+                    <li><a href="dash.html">Charts and Graphs</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <h1>Farm Health Overview</h1>
+            <p>Monitor soil conditions, crop health, and environmental factors here.</p>
+
+            <section class="farm-health-metrics">
+                <section class="pest-pressure">
+                    <h2>Pest Pressure</h2>
+                    <div class="gauge-chart">
+                        <canvas id="pestGauge"></canvas>
+                    </div>
+                    <div class="pest-list">
+                        <h3>Common Pests</h3>
+                        <ul>
+                            <li>Aphids</li>
+                            <li>Jasids</li>
+                            <li>Whiteflies</li>
+                            <li>Thrips</li>
+                            <li>Aphis gossypii</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const pestCtx = document.getElementById('pestGauge').getContext('2d');
+                        new Chart(pestCtx, {
+                            type: 'doughnut',
+                            data: {
+                                datasets: [{
+                                    data: [50, 30, 20], 
+                                    backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+                                }]
+                            },
+                            options: {
+                                rotation: -90, 
+                                circumference: 180, 
+                                cutout: '40%', 
+                                plugins: {
+                                    tooltip: { enabled: true } 
+                                }
+                            }
+                        });
+                    });
+                </script>
+                
+                
+                <section class="nutri-status">
+                    <h2>Nutri Status</h2>
+                    <div class="gauge-chart">
+                        <canvas id="nutriGauge"></canvas>
+                    </div>
+                
+                    <!-- Color Indication for Nutrients -->
+                    <div class="nutrient-legend">
+                        <div class="legend-item"><span class="color-box" style="background-color: #3498db;"></span> Nitrogen</div>
+                        <div class="legend-item"><span class="color-box" style="background-color: #9b59b6;"></span> Phosphorous</div>
+                        <div class="legend-item"><span class="color-box" style="background-color: #e67e22;"></span> Potassium</div>
+                        <div class="legend-item"><span class="color-box" style="background-color: #f1c40f;"></span> Calcium</div>
+                        <div class="legend-item"><span class="color-box" style="background-color: #e74c3c;"></span> Boron</div>
+                        <div class="legend-item"><span class="color-box" style="background-color: #2ecc71;"></span> Magnesium</div>
+                    </div>
+                
+                    <div class="progress-container">
+                        <div class="progress-bar"><div class="progress nitrogen">80%</div></div>
+                        <div class="progress-bar"><div class="progress phosphorous">65%</div></div>
+                        <div class="progress-bar"><div class="progress potassium">75%</div></div>
+                        <div class="progress-bar"><div class="progress calcium">50%</div></div>
+                        <div class="progress-bar"><div class="progress boron">40%</div></div>
+                        <div class="progress-bar"><div class="progress magnesium">70%</div></div>
+                    </div>
+                </section>
+                
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Nutri Status Semi-Circle Pie Chart
+                        const nutriCtx = document.getElementById('nutriGauge').getContext('2d');
+                        new Chart(nutriCtx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Nitrogen', 'Phosphorous', 'Potassium', 'Calcium', 'Boron', 'Magnesium'],
+                                datasets: [{
+                                    data: [80, 65, 75, 50, 40, 70], // Example percentages
+                                    backgroundColor: ['#3498db', '#9b59b6', '#e67e22', '#f1c40f', '#e74c3c', '#2ecc71']
+                                }]
+                            },
+                            options: {
+                                rotation: -90, // Start from the bottom
+                                circumference: 180, // Display only top half
+                                cutout: '50%', // Adjust thickness
+                                plugins: {
+                                    legend: { display: false }, // Hide default chart legend
+                                    tooltip: { enabled: true }
+                                }
+                            }
+                        });
+                    });
+                </script>
+                
+                
+                
+                
+                <section class="disease-risk">
+                    <h2>Disease Risk</h2>
+                    <div class="gauge-chart">
+                        <canvas id="diseaseGauge"></canvas>
+                    </div>
+                
+                    <!-- Disease Information Box -->
+                    <div class="disease-info">
+                        <p><strong>Current Risk Level:</strong> Moderate</p>
+                        <p><strong>Potential Diseases:</strong> Leaf Spot, Rust, Blight</p>
+                        <p><strong>Suggested Actions:</strong> Apply preventive fungicides, monitor humidity levels, and ensure good air circulation.</p>
+                    </div>
+                </section>
+                
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const diseaseCtx = document.getElementById('diseaseGauge').getContext('2d');
+                        new Chart(diseaseCtx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Low Risk', 'Moderate Risk', 'High Risk'],
+                                datasets: [{
+                                    data: [30, 50, 20], 
+                                    backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+                                }]
+                            },
+                            options: {
+                                rotation: -90, 
+                                circumference: 180,
+                                cutout: '50%',
+                                plugins: {
+                                    legend: { display: false }, 
+                                    tooltip: { enabled: true }
+                                }
+                            }
+                        });
+                    });
+                </script>                
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Soil pH Chart
+            const phCtx = document.getElementById('phChart').getContext('2d');
+            new Chart(phCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Field 1', 'Field 2', 'Field 3'],
+                    datasets: [{
+                        label: 'pH Level',
+                        data: [6.5, 7.0, 5.8],
+                        backgroundColor: ['green', 'blue', 'red']
+                    }]
+                }
+            });
+
+            // Moisture Levels Chart
+            const moistureCtx = document.getElementById('moistureChart').getContext('2d');
+            new Chart(moistureCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Moisture (%)',
+                        data: [60, 70, 65, 75],
+                        borderColor: 'blue',
+                        fill: false
+                    }]
+                }
+            });
+
+            // Crop Health Index Chart
+            const cropHealthCtx = document.getElementById('cropHealthChart').getContext('2d');
+            new Chart(cropHealthCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Healthy', 'Moderate', 'Poor'],
+                    datasets: [{
+                        data: [70, 20, 10],
+                        backgroundColor: ['green', 'yellow', 'red']
+                    }]
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Disease Risk Gauge Chart
+            const diseaseCtx = document.getElementById('diseaseGauge').getContext('2d');
+            new Chart(diseaseCtx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [30, 50, 20], // Example risk levels: Low, Moderate, High
+                        backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+                    }]
+                },
+                options: {
+                    cutout: '80%',
+                    plugins: {
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+        }); -->
+    </script>
+</body>
+</html>

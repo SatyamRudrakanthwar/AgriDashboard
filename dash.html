@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Dashboard</title>
+    <link rel="stylesheet" href="dash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">AgriSavant™</header>
+    <div class="container">
+        <aside class="sidebar">
+            <button class="owner-btn">Owner</button>
+            <nav>
+                <ul>
+                    <li><a href="dash.html">Dashboard</a></li>
+                    <li><a href="farm_health.html">Farm Health</a></li>
+                    <li><a href="cal.html">Action Calendar</a></li>
+                    <li><a href="dash.html">Charts and Graphs</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+
+            <div class="top-bar">
+                <span>Farm ID:</span>
+                <div>
+                    <button class="btn">+ Farm Details</button>
+                    <button class="btn">+ Add Notes</button>
+                </div>
+            </div>
+
+            <!-- Three Boxes Below Buttons (Updated with Graphs) -->
+            <section class="farm-metrics">
+                <div class="metric-box">
+                    <h3>RH Value Trends</h3>
+                    <canvas id="rhChart"></canvas>
+                </div>
+                <div class="metric-box">
+                    <h3>Temperature Variations</h3>
+                    <canvas id="tempChart"></canvas>
+                </div>
+                <div class="metric-box">
+                    <h3>Rainfall Probability</h3>
+                    <canvas id="rainfallChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Farm Notice Board with Image & Gauge Chart -->
+            <section class="notice-board">
+                <h2>Farm Notice Board</h2>
+                <div class="notice-content">
+                    <img src="images (2).jpeg" class="farm-image" alt="Farm View">
+                    <div class="gauge-chart">
+                        <h3>Soil Moisture</h3>
+                        <canvas id="moistureGauge"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wrapper Box for Weather, Soil Health & Tasks -->
+            <section class="farm-metrics-wrapper">
+                <div class="farm-metrics">
+                    <div class="metric-box weather">
+                        <h3>Weather Forecast</h3>
+                        <p>Sunny, 28°C</p>
+                        <p>Humidity: 60%</p>
+                    </div>
+                    <div class="metric-box soil">
+                        <h3>Soil Health</h3>
+                        <p>pH Level: 6.5</p>
+                        <p>Moisture: 70%</p>
+                    </div>
+                    <div class="metric-box tasks">
+                        <h3>Upcoming Tasks</h3>
+                        <p>- Irrigation in 2 days</p>
+                        <p>- Pest Control Check</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // RH Value Chart
+            const rhCtx = document.getElementById('rhChart').getContext('2d');
+            new Chart(rhCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'RH (%)',
+                        data: [50, 55, 60, 62, 58, 65, 70],
+                        borderColor: 'green',
+                        fill: false
+                    }]
+                }
+            });
+
+            // Temperature Chart
+            const tempCtx = document.getElementById('tempChart').getContext('2d');
+            new Chart(tempCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Morning', 'Noon', 'Evening', 'Night'],
+                    datasets: [{
+                        label: 'Temperature (°C)',
+                        data: [22, 30, 27, 20],
+                        backgroundColor: ['orange', 'red', 'yellow', 'blue']
+                    }]
+                }
+            });
+
+            // Rainfall Probability Chart
+            const rainfallCtx = document.getElementById('rainfallChart').getContext('2d');
+            new Chart(rainfallCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Low', 'Medium', 'High'],
+                    datasets: [{
+                        data: [40, 35, 25],
+                        backgroundColor: ['lightblue', 'blue', 'darkblue']
+                    }]
+                }
+            });
+
+            // Moisture Gauge Chart (With 3 Colors)
+            const moistureCtx = document.getElementById('moistureGauge').getContext('2d');
+            new Chart(moistureCtx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [40, 30, 30], // 40% Green, 30% Yellow, 30% Red
+                        backgroundColor: ['green', 'yellow', 'red']
+                    }]
+                },
+                options: {
+                    rotation: -90, 
+                    circumference: 180, 
+                    cutout: '70%',
+                    plugins: {
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
